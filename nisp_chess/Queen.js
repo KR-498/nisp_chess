@@ -1,24 +1,26 @@
+// Klasa reprezentująca królową
 class Queen {
     constructor() {
         this.type = "QUEEN";
     }
 
     validateMove(move) {
-        const dX = Math.abs(move.to.x - move.from.x);
-        const dY = Math.abs(move.to.y - move.from.y);
+        // Obliczamy dystans przesunięcia w osi X oraz Y
+        const distanceX = Math.abs(move.destinationX - move.sourceX);
+        const distanceY = Math.abs(move.destinationY - move.sourceY);
 
-        // Ruch w miejscu jest nieprawidłowy
-        if (dX === 0 && dY === 0) {
+        // Królowa nie może stanąć w miejscu (ruch musi się odbyć)
+        if (distanceX === 0 && distanceY === 0) {
             return false;
         }
 
-        // Ruch jak wieża (tylko w pionie lub tylko w poziomie)
-        const isRookMove = dX === 0 || dY === 0;
+        // Ruch jest poprawny, jeśli:
+        // 1. Ruch jak wieża (tylko pionowo lub tylko poziomo: jeden z dystansów wynosi 0)
+        // 2. Ruch jak goniec (po przekątnej: dystans X jest równy dystansowi Y)
+        if (distanceX === 0 || distanceY === 0 || distanceX === distanceY) {
+            return true;
+        }
 
-        // Ruch jak goniec (po skosie - przesunięcie X i Y jest równe)
-        const isBishopMove = dX === dY;
-
-        // Królowa łączy oba te ruchy
-        return isRookMove || isBishopMove;
+        return false;
     }
 }

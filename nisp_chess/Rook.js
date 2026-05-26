@@ -5,8 +5,18 @@ class Rook {
     }
 
     validateMove(move) {
-        
-        // dokoncz implementacje
+
+        // ruch pionowy
+        if (move.sourceX === move.destinationX) {
+            return true;
+        }
+
+        // ruch poziomy
+        if (move.sourceY === move.destinationY) {
+            return true;
+        }
+
+        // niepoprawny ruch
         return false;
     }
 }
